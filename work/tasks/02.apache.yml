@@ -1,0 +1,13 @@
+#! vi: set filetype=ansible:
+---
+- hosts : all
+  remote_user : vagrant
+  sudo : True
+  tasks :
+    - name : 'Apache Install'
+      yum : name=httpd state=latest
+    - service: name=httpd enabled=yes state=started
+
+  handlers:
+    - name: ssh restart
+      service: name=sshd state=restarted
